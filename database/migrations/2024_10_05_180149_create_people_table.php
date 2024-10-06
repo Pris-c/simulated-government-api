@@ -12,12 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('people', function (Blueprint $table) {
-            $table->bigIncrements('id'); //Auto-increment, pk (BigIncrements)
-            $table->string('name',100); //nome da entidade
-            $table->string('nif',9)->unique(); //nif unico, sem permissão de repetição
-            $table->date('birthdate'); //data de nascimento
-
-            $table->timestamps(); // atualização de criações ou edições de dados na db
+            $table->id();
+            $table->string('name',100);
+            $table->string('nif',9)->unique();
+            $table->date('birthdate');
+            $table->timestamps();
         });
     }
 
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('people');
     }
 };
