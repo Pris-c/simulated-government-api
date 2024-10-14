@@ -32,8 +32,5 @@ class UserApiController extends Controller
         return response()->json(false, 200);
     }
 
-    public function index()
-    {
-        return response()->json(Citizen::paginate(), 200);
-    }
+    
 }
