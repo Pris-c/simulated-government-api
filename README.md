@@ -1,66 +1,89 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Government API (Simulation)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This repository simulates a Government API that allows the verification of whether citizen information—**name**, **NIF** (Tax Identification Number), and **birth date**—matches data from an official governmental database. It is built using Laravel and utilizes MySQL for its database, offering a simple and secure flow for simulating this verification process.
 
-## About Laravel
+## Features
+- **HTTP Method: POST**: Simulates verification of the provided **name**, **NIF**, and **birth date** against a mock governmental database.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Laravel** as the backend framework.
+- Migrations and seeders to populate the database with test data.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Installation
+Follow the steps below to set up the project locally:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+**Clone the repository:**
+```bash
+git clone https://github.com/your-username/Government_API.git
+```
 
-## Learning Laravel
+**Install dependencies:**
+```bash
+composer install
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**Configure the environment:**
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Rename the `.env.example` file to `.env`:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+**In the .env file, configure your database information.**
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## API Documentation
 
-### Premium Partners
+### POST: /api/citizen/verify
+This endpoint verifies a citizen's information in the database.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+- **Method**: POST
 
-## Contributing
+- Responses:
+    - **200 OK**: true (Information verified successfully)
+    - **200 OK**: false (Citizen not found)
+    - **400 Bad Request**: Incorrect data.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+We use POST to ensure security when sending sensitive data in the request body.
 
-## Code of Conduct
+## Usage
+You can test the API with Postman or Insomnia by sending a POST request to:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+`your_local_host/api/citizen/verify`.
 
-## Security Vulnerabilities
+Use the following request body:
+```json
+{
+    "name": "Ana Costa",
+    "nif": "246813579",
+    "birthdate": "1992-06-05"
+}
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Expected responses:
+- **true** if the information is correct.
+- **false** if not found.
 
-## License
+## Additional Information
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Running Migrations
+After installing Composer dependencies, you must run the existing migrations to create the necessary tables in the database. This ensures that the database structure is properly set up:
+```bash
+php artisan migrate
+```
+
+### Database Seeder
+To populate the database with initial test data, you can run the database seeder. The following command will execute the seeder:
+```bash
+php artisan db:seed
+```
+
+
+
+### Environment Configuration
+Make sure to set up your `.env` file correctly to reflect your local environment settings, especially the database connection parameters. This ensures that the application can connect to your database without issues.
+
+## Conclusion
+The Government API provides a straightforward and secure way to verify citizen information, making it an essential tool for applications that require identity verification. By following the installation and configuration steps outlined above, you can easily set up and start using the API for your projects.
+
+
+## Authors ✨
+
+🦆 **The DuckTeam**:
+[Pris-c](https://github.com/Pris-c), [Arthur](https://github.com/ArthurSSR-alt), [Thais](https://github.com/thaisfreires), e [Gabriel](https://github.com/gabrielbeli).
